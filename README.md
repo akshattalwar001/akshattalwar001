@@ -1,6 +1,21 @@
 ## Hi there, I'm Akshat Talwar <img width="100px" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWY1bmFrdWVyd3c0YXAxYnQwazc1MTMxendtM2k1bnB0Z251Ymh1cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/dRk36UfCgXgblG6LHv/giphy.gif" />
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=2E9EF7&vCenter=true&width=600&lines=Machine+Learning;Python+%26+Go+API+%F0%9F%94%97;Open+Source+Contributor;Turning+Data+into+Insights+%F0%9F%93%8A)](https://git.io/typing-svg)
+<div>
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=2E9EF7&vCenter=true&width=600&lines=Machine+Learning;Python+%26+Go+API+%F0%9F%94%97;Open+Source+Contributor;Turning+Data+into+Insights+%F0%9F%93%8A" alt="Typing SVG" align="left" width="50%" />
+  </a>
+  <picture align="right">
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="https://raw.githubusercontent.com/akshattalwar001/akshattalwar001/github-breakout/images/breakout-dark.svg"
+    />
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="https://raw.githubusercontent.com/akshattalwar001/akshattalwar001/github-breakout/images/breakout-light.svg"
+    />
+    <img alt="Breakout Game" src="https://raw.githubusercontent.com/akshattalwar001/akshattalwar001/github-breakout/images/breakout-light.svg" width="45%" />
+  </picture>
+</div>
+<br clear="both"/>
 
 <div align="center">
   
@@ -59,5 +74,23 @@ Helloo myself Akshat Talwar... I work around machine learning, deep learning, co
 [![GitHub Streak](https://streak-stats.demolab.com?user=akshattalwar001&theme=gruvbox-duo)](https://git.io/streak-stats)
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
