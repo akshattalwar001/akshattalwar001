@@ -1,35 +1,54 @@
-name: Update Profile Views Counter
+name: Update Profile Views
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # updates every 10 minutes
-  workflow_dispatch:
+    - cron: "*/10 * * * *"  # Every 10 minutes
+  workflow_dispatch:  # Manual trigger
 
 jobs:
-  update-counter:
+  update-views:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - id: get-gist
-        name: Fetch current gist
+      - name: Fetch current views
+        id: fetch
         run: |
-          curl -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
-            https://gist.githubusercontent.com/akshattalwar001/c3652432c09553c98eca4e6771f6e145/raw/profile-views.json \
-            -o profile-views.json
+          GIST_ID="c3652432c09553c98eca4e6771f6e145"
+          RESPONSE=$(curl -s "https://gist.githubusercontent.com/akshattalwar001/${GIST_ID}/raw/profile-views.json")
+          echo "Current data: $RESPONSE"
+          
+          # Extract views count
+          VIEWS=$(echo "$RESPONSE" | jq -r '.views')
+          echo "Current views: $VIEWS"
+          
+          # Increment
+          NEW_VIEWS=$((VIEWS + 1))
+          echo "New views: $NEW_VIEWS"
+          echo "views=$NEW_VIEWS" >> $GITHUB_OUTPUT
 
-      - name: Increment view count
-        id: inc
+      - name: Update Gist
         run: |
-          current=$(jq '.views' profile-views.json)
-          echo "Current: $current"
-          next=$((current + 1))
-          echo $next
-          echo "{\"views\": $next}" > profile-views.json
-
-      - name: Update gist with new count
-        run: |
+          GIST_ID="c3652432c09553c98eca4e6771f6e145"
+          NEW_VIEWS="${{ steps.fetch.outputs.views }}"
+          
+          # Create JSON payload
+          JSON_PAYLOAD=$(jq -n \
+            --arg views "$NEW_VIEWS" \
+            '{
+              "files": {
+                "profile-views.json": {
+                  "content": "{\"views\": \($views)}"
+                }
+              }
+            }')
+          
+          echo "Updating Gist with: $JSON_PAYLOAD"
+          
+          # Update the Gist
           curl -X PATCH \
             -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d "{\"files\": {\"profile-views.json\": {\"content\": \"$(cat profile-views.json | sed 's/\"/\\\"/g')\"}}}" \
-            https://api.github.com/gists/c3652432c09553c98eca4e6771f6e145
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/gists/${GIST_ID}" \
+            -d "$JSON_PAYLOAD"
+          
+          echo "✅ Profile views updated to: $NEW_VIEWS"
