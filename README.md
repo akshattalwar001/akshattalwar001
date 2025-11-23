@@ -16,6 +16,8 @@
 
 Helloo myself Akshat Talwar... I work around machine learning, deep learning, computer vision and agentic ai. I’m comfortable with deployment, ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) , ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white) and ![Hugging Face](https://img.shields.io/badge/Hugging_Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black) and i learn new tools or frameworks very quickly. I like building things that actually work end-to-end and experimenting with LLMs, RAG and automation workflows to make ai systems more useful in real scenarios.
 
+![Profile Views](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/AkshatTalwar/c3652432c09553c98eca4e6771f6e145/raw/profile-views.json)
+
 ---
 
 ## Tech Stack
