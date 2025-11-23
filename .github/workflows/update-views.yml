@@ -14,7 +14,7 @@ jobs:
         name: Fetch current gist
         run: |
           curl -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
-            https://gist.githubusercontent.com/AkshatTalwar/c3652432c09553c98eca4e6771f6e145/raw/profile-views.json \
+            https://gist.githubusercontent.com/akshattalwar001/c3652432c09553c98eca4e6771f6e145/raw/profile-views.json \
             -o profile-views.json
 
       - name: Increment view count
