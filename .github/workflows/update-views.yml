@@ -10,45 +10,57 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Fetch current views
-        id: fetch
+      - name: Fetch and Update Views
         run: |
           GIST_ID="c3652432c09553c98eca4e6771f6e145"
+          
+          # Fetch current data
           RESPONSE=$(curl -s "https://gist.githubusercontent.com/akshattalwar001/${GIST_ID}/raw/profile-views.json")
           echo "Current data: $RESPONSE"
           
-          # Extract views count
-          VIEWS=$(echo "$RESPONSE" | jq -r '.views')
-          echo "Current views: $VIEWS"
+          # Extract current count (handles both old and new format)
+          if echo "$RESPONSE" | jq -e '.message' > /dev/null 2>&1; then
+            # New shields.io format
+            CURRENT_VIEWS=$(echo "$RESPONSE" | jq -r '.message')
+          else
+            # Old simple format
+            CURRENT_VIEWS=$(echo "$RESPONSE" | jq -r '.views // 4570')
+          fi
+          
+          echo "Current views: $CURRENT_VIEWS"
           
           # Increment
-          NEW_VIEWS=$((VIEWS + 1))
+          NEW_VIEWS=$((CURRENT_VIEWS + 1))
           echo "New views: $NEW_VIEWS"
-          echo "views=$NEW_VIEWS" >> $GITHUB_OUTPUT
-
-      - name: Update Gist
-        run: |
-          GIST_ID="c3652432c09553c98eca4e6771f6e145"
-          NEW_VIEWS="${{ steps.fetch.outputs.views }}"
           
-          # Create JSON payload
-          JSON_PAYLOAD=$(jq -n \
-            --arg views "$NEW_VIEWS" \
+          # Create shields.io compatible JSON
+          SHIELDS_JSON=$(jq -n \
+            --arg count "$NEW_VIEWS" \
+            '{
+              "schemaVersion": 1,
+              "label": "Profile Views",
+              "message": $count,
+              "color": "blue"
+            }')
+          
+          echo "New JSON: $SHIELDS_JSON"
+          
+          # Create Gist update payload
+          GIST_PAYLOAD=$(jq -n \
+            --arg content "$SHIELDS_JSON" \
             '{
               "files": {
                 "profile-views.json": {
-                  "content": "{\"views\": \($views)}"
+                  "content": $content
                 }
               }
             }')
-          
-          echo "Updating Gist with: $JSON_PAYLOAD"
           
           # Update the Gist
           curl -X PATCH \
             -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             "https://api.github.com/gists/${GIST_ID}" \
-            -d "$JSON_PAYLOAD"
+            -d "$GIST_PAYLOAD"
           
           echo "✅ Profile views updated to: $NEW_VIEWS"
