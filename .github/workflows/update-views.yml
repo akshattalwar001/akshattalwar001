@@ -1,0 +1,35 @@
+name: Update Profile Views Counter
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # updates every 10 minutes
+  workflow_dispatch:
+
+jobs:
+  update-counter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: get-gist
+        name: Fetch current gist
+        run: |
+          curl -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
+            https://gist.githubusercontent.com/AkshatTalwar/c3652432c09553c98eca4e6771f6e145/raw/profile-views.json \
+            -o profile-views.json
+
+      - name: Increment view count
+        id: inc
+        run: |
+          current=$(jq '.views' profile-views.json)
+          echo "Current: $current"
+          next=$((current + 1))
+          echo $next
+          echo "{\"views\": $next}" > profile-views.json
+
+      - name: Update gist with new count
+        run: |
+          curl -X PATCH \
+            -H "Authorization: token ${{ secrets.GIST_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"files\": {\"profile-views.json\": {\"content\": \"$(cat profile-views.json | sed 's/\"/\\\"/g')\"}}}" \
+            https://api.github.com/gists/c3652432c09553c98eca4e6771f6e145
