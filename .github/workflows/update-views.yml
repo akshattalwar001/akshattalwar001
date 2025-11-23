@@ -64,3 +64,8 @@ jobs:
             -d "$GIST_PAYLOAD"
           
           echo "✅ Profile views updated to: $NEW_VIEWS"
+          
+          # Force badge cache refresh by pinging shields.io
+          sleep 2
+          curl -s "https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/akshattalwar001/c3652432c09553c98eca4e6771f6e145/raw/profile-views.json" > /dev/null
+          echo "🔄 Badge cache refreshed"
