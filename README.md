@@ -56,7 +56,7 @@ Helloo myself Akshat Talwar... I work around machine learning, deep learning, co
 
 <div align="center">
 
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=akshattalwar001&theme=github-green-purple&short_numbers=true&date_format=M%20j%5B%2C%20Y%5D)](https://git.io/streak-stats)
+[![GitHub Streak](https://streak-stats.demolab.com?user=akshattalwar001&theme=gruvbox-duo)](https://git.io/streak-stats)
 
 </div>
 
