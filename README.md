@@ -19,7 +19,7 @@
 
 <div align="center">
   
-[![Portfolio](https://img.shields.io/badge/Portfolio-akshttalwar.me-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://akshttalwar.me)
+[![Portfolio](https://img.shields.io/badge/Portfolio-akshattalwar.me-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://akshttalwar.me)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Akshat_Talwar-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/akshat-talwar)
 [![Email](https://img.shields.io/badge/Email-akshattalwar100%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:akshattalwar100@gmail.com)
 
